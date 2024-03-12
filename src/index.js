@@ -1,3 +1,3 @@
-import('./render').then(exports => {
-    exports.render()
-})
+console.log("this is log");
+console.warn("this is warn");
+console.error("this is error");

@@ -26,6 +26,36 @@ const config = {
       : path.resolve(__dirname, "rspack-dist"),
     filename: "[name].js",
   },
+  module: {
+    rules: [
+      {
+        test: /\.(?:js|jsx|mjs|cjs|ts|tsx|mts|cts)$/,
+        type: 'javascript/auto',
+        use: {
+          loader: "builtin:swc-loader",
+          options: {
+            sourceMap: true,
+            jsc: {
+              parser: {
+                syntax: "typescript",
+                jsx: true,
+              },
+              experimental: {
+                plugins: [
+                  [
+                    "@swc/plugin-remove-console",
+                    {
+                      exclude: ["error"],
+                    },
+                  ],
+                ],
+              },
+            },
+          },
+        },
+      },
+    ],
+  },
   experiments: {
     css: true,
   },
