@@ -1,7 +1,7 @@
 (function() {
 var __webpack_modules__ = {
 "./src/index.js": (function () {
-console.error("this is error");
+throw new Error("  \u001b[31m×\u001b[0m Module parse failed:\n\u001b[31m  ╰─▶ \u001b[0m  \u001b[31m×\u001b[0m JavaScript parsing error: Expression expected\n\u001b[31m      \u001b[0m   ╭─[1:1]\n\u001b[31m      \u001b[0m \u001b[2m1\u001b[0m │ console.error(\"this is error\");\n\u001b[31m      \u001b[0m \u001b[2m2\u001b[0m │ var a = 1;\n\u001b[31m      \u001b[0m \u001b[2m3\u001b[0m │  = this; // this throws an error if we use buildin swc-loader\n\u001b[31m      \u001b[0m   · \u001b[35;1m ─\u001b[0m\n\u001b[31m      \u001b[0m   ╰────\n\u001b[31m      \u001b[0m\n\u001b[36m  help: \u001b[0m\n        File was processed with these loaders:\n         * builtin:swc-loader??ruleSet[1].rules[0].use[0]\n        You may need an additional loader to handle the result of these loaders.\n");
 }),
 
 }

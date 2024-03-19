@@ -1,26 +1,20 @@
-# rspack-repro
-
-- [Rspack website](https://www.rspack.dev/)
-- [Rspack repo](https://github.com/web-infra-dev/rspack)
-
-A GitHub template for creating a Rspack minimal reproducible example.
-
-Webpack is included for comparing the outputs.
-
-## versions
-
+## Repro
 ```
-    "@rspack/cli": "nightly",
-    "webpack-cli": "^5.0.1",
-    "webpack": "^5.79.0",
+npm install -g pnpm
 ```
 
-## Usages
+Run rspack with builtin swc loader and swc plugin
+```
+npm run build:builtin
+```
+This will give error "Module parse failed"
 
-`pnpm run build` would both run Webpack and Rspack with config `./config.mjs`
+If we use swc-loader, things are working fine
+```
+npm run build
+```
 
-- Webpack will emits output in `./webpack-dist`
-- Rspack will emits output in `./rspack-dist`
-
-`./webpack-dist` and `./rspack-dist` are purposely not added to `.gitignore`.
-It is recommended to commit these files so we quickly compare the outputs.
+If we use don't use swc plugins, things are working fine
+```
+npm run build:noplugins
+```

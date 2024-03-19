@@ -3,11 +3,10 @@ import { fileURLToPath } from "url";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const isRunningWebpack = !!process.env.WEBPACK;
-const isRunningRspack = !!process.env.RSPACK;
-if (!isRunningRspack && !isRunningWebpack) {
-  throw new Error("Unknown bundler");
-}
+const useBuiltIn = !!process.env.BUILTIN;
+const noPlugins = !!process.env.NOPLUGINS;
+console.log("useBuiltIn", useBuiltIn);
+console.log("noPlugins", noPlugins);
 
 /**
  * @type {import('webpack').Configuration | import('@rspack/cli').Configuration}
@@ -18,12 +17,9 @@ const config = {
   entry: {
     main: "./src/index",
   },
-  plugins: [new HtmlWebpackPlugin()],
   output: {
     clean: true,
-    path: isRunningWebpack
-      ? path.resolve(__dirname, "webpack-dist")
-      : path.resolve(__dirname, "rspack-dist"),
+    path: path.resolve(__dirname, "rspack-dist"),
     filename: "[name].js",
   },
   module: {
@@ -32,7 +28,7 @@ const config = {
         test: /\.(?:js|jsx|mjs|cjs|ts|tsx|mts|cts)$/,
         type: 'javascript/auto',
         use: {
-          loader: "builtin:swc-loader",
+          loader: useBuiltIn ? "builtin:swc-loader" : "swc-loader",
           options: {
             sourceMap: true,
             jsc: {
@@ -41,7 +37,7 @@ const config = {
                 jsx: true,
               },
               experimental: {
-                plugins: [
+                plugins: noPlugins ? [] : [
                   [
                     "@swc/plugin-remove-console",
                     {
